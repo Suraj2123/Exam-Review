@@ -972,523 +972,723 @@ Iterators also follow **Dependency Inversion**: algorithms like `std::sort` depe
 ---
 ---
 
-# PRACTICE EXAM
+# PRACTICE EXAM — VARIATION A
 
-**Mix of Multiple Choice + Free Response**
-
----
-
-## PART A: MULTIPLE CHOICE (Q1–Q30)
+**Modeled after the real Exam 2 format: matching, select-all, code writing, ordering, MCQ**
 
 ---
 
-**1.** Which SOLID principle states that a class should have only one reason to change?
+**Q1. (3 pts) Match each SOLID principle with the BEST description.**
 
-A) Open/Closed Principle
-B) Liskov Substitution Principle
-C) Single Responsibility Principle
-D) Dependency Inversion Principle
-
----
-
-**2.** A function uses a long if/else chain to handle different shape types. Every time a new shape is added, this function must be edited. Which SOLID principle is being violated?
-
-A) SRP
-B) OCP
-C) ISP
-D) LSP
+| Principle | | Description |
+|---|---|---|
+| Single Responsibility | ___ | A) Entities can be extended but not modified |
+| Open/Closed | ___ | B) Do not force clients to depend on methods they don't use |
+| Liskov Substitution | ___ | C) Each class should have only one well-defined responsibility |
+| Interface Segregation | ___ | D) Entities must only depend on abstractions |
+| Dependency Inversion | ___ | E) Subclass instances can replace superclass instances without breaking correctness |
 
 ---
 
-**3.** A `Square` class inherits from `Rectangle` and overrides `setWidth()` to also change the height. Code using a `Rectangle*` pointer breaks when it receives a `Square`. Which principle is violated?
+**Q2. (4 pts) Write the assert statements.**
 
-A) SRP
-B) OCP
-C) LSP
-D) DIP
-
----
-
-**4.** An `Animal` interface requires `fly()`, `swim()`, and `run()`. A `Dog` class is forced to implement `fly()` even though dogs can't fly. Which principle is violated?
-
-A) SRP
-B) OCP
-C) LSP
-D) ISP
-
----
-
-**5.** A class `OrderService` directly creates a `MySQLDatabase` object inside its constructor. Which SOLID principle does this violate?
-
-A) SRP
-B) LSP
-C) ISP
-D) DIP
-
----
-
-**6.** In C++, which access modifier makes a member accessible to subclasses but NOT to code outside the class?
-
-A) public
-B) private
-C) protected
-D) friend
-
----
-
-**7.** What is the purpose of a pure virtual function (`= 0`) in C++?
-
-A) It provides a default implementation that subclasses can optionally override
-B) It makes the class abstract and forces subclasses to provide an implementation
-C) It prevents the function from being called
-D) It makes the function run faster
-
----
-
-**8.** In Python, if an object has a `sound()` method, Python will call it regardless of whether the class inherits from `Animal`. This behavior is called:
-
-A) Polymorphism
-B) Encapsulation
-C) Duck typing
-D) Dependency injection
-
----
-
-**9.** What is the correct priority order of the 4 Rules of Simple Design (Emergent Design)?
-
-A) No duplication → Run tests → Expressive → Minimal
-B) Run tests → No duplication → Expressive → Minimal
-C) Expressive → Minimal → No duplication → Run tests
-D) Minimal → Run tests → Expressive → No duplication
-
----
-
-**10.** Which design pattern breaks an algorithm into steps, puts them in an abstract class, and lets subclasses override specific steps?
-
-A) Strategy Pattern
-B) Observer Pattern
-C) Template Method Pattern
-D) Singleton Pattern
-
----
-
-**11.** Which is NOT a disadvantage of emergent design?
-
-A) No plan for changes can cause design to deteriorate
-B) Ignores crucial dependencies
-C) Requires too much upfront planning
-D) Lack of coordination can cause development deadlocks
-
----
-
-**12.** The "span" of a variable refers to:
-
-A) The total number of lines in the function
-B) The number of lines between consecutive references to that variable
-C) The number of times the variable is used
-D) The scope of the variable
-
----
-
-**13.** Why should you minimize the "live time" of a variable?
-
-A) It makes the program run faster
-B) It reduces the window of vulnerability where bugs can be introduced
-C) It uses less memory
-D) It satisfies the compiler
-
----
-
-**14.** According to C++ naming conventions, which is correct?
-
-A) Constants use camelCase: `maxSize`
-B) Class names use ALL_CAPS: `MY_CLASS`
-C) Constants use ALL_CAPS: `MAX_SIZE`
-D) Variable names use MixedCase: `VariableName`
-
----
-
-**15.** What does `static_assert` do in C++?
-
-A) Checks a condition at runtime and aborts if false
-B) Checks a condition at compile time and fails compilation if false
-C) Logs a warning message at runtime
-D) Disables assertions in release builds
-
----
-
-**16.** In defensive programming, a "barricade" refers to:
-
-A) A firewall that blocks network attacks
-B) A validation layer at the boundary that separates dirty external data from the clean core system
-C) A class that prevents inheritance
-D) A lock that prevents concurrent access
-
----
-
-**17.** Which error-handling approach is most appropriate for a safety-critical system (e.g., medical device) when invalid input is detected?
-
-A) Return a neutral value and continue
-B) Log a warning to a file
-C) Shut down the system
-D) Return the same answer as last time
-
----
-
-**18.** In offensive programming, you should:
-
-A) Hide all errors from users
-B) Make errors fail as loudly and visibly as possible during development
-C) Catch all exceptions silently
-D) Only test the happy path
-
----
-
-**19.** What is loop-invariant code motion?
-
-A) Splitting a loop into two separate loops
-B) Combining two loops into one
-C) Moving computations that don't change per iteration outside the loop
-D) Reversing the order of loop iterations
-
----
-
-**20.** Which loop optimization improves cache performance for multi-dimensional arrays?
-
-A) Loop fusion
-B) Loop fission
-C) Loop interchange
-D) Loop unrolling
-
----
-
-**21.** Strength reduction replaces:
-
-A) Loops with recursion
-B) Expensive operations with cheaper equivalents (e.g., multiplication with addition)
-C) Variables with constants
-D) Dynamic allocation with stack allocation
-
----
-
-**22.** What should you ALWAYS do before optimizing code?
-
-A) Rewrite the entire module
-B) Measure and profile to find the actual bottleneck
-C) Optimize every function equally
-D) Remove all comments
-
----
-
-**23.** In Google Test, what is the difference between `EXPECT_EQ` and `ASSERT_EQ`?
-
-A) They do the same thing
-B) `EXPECT_EQ` is non-fatal (test continues on failure); `ASSERT_EQ` is fatal (test stops)
-C) `ASSERT_EQ` is non-fatal; `EXPECT_EQ` is fatal
-D) `EXPECT_EQ` is for integers only; `ASSERT_EQ` is for strings
-
----
-
-**24.** High code coverage means:
-
-A) The code is bug-free
-B) Many lines/branches were executed by tests, but not necessarily validated correctly
-C) Every edge case has been tested
-D) The architecture is well-designed
-
----
-
-**25.** In a GitHub Actions YAML file, what does `on: push` specify?
-
-A) The operating system to use
-B) The event that triggers the workflow
-C) The name of the job
-D) The test framework to use
-
----
-
-**26.** What does `end()` return in C++?
-
-A) An iterator to the last element
-B) An iterator past the last element
-C) The value of the last element
-D) The size of the container
-
----
-
-**27.** Which iterator category supports jumping to any position (e.g., `it + 5`, `it[3]`)?
-
-A) Input iterator
-B) Forward iterator
-C) Bidirectional iterator
-D) Random access iterator
-
----
-
-**28.** According to the Personal Character lecture, the best programmer is:
-
-A) The most intelligent one
-B) The one who writes the cleverest code
-C) The most humble one — with discipline, curiosity, and experience
-D) The one with the most years of experience
-
----
-
-**29.** "Crunch culture" in software development refers to:
-
-A) Optimizing code for performance
-B) Extended periods of overwork (60–80+ hour weeks)
-C) Compressing code into fewer files
-D) Reducing team size
-
----
-
-**30.** Which assertion should you use in Google Test when a null pointer check must pass before the rest of the test can run?
-
-A) `EXPECT_NE(ptr, nullptr)` — let the test continue even if it fails
-B) `ASSERT_NE(ptr, nullptr)` — stop the test immediately if it fails
-C) `EXPECT_TRUE(ptr)` — always use EXPECT
-D) No assertion needed — just dereference and hope
-
----
----
-
-## PART B: FREE RESPONSE
-
----
-
-**31.** A class called `ReportManager` does the following:
-- Fetches data from a database
-- Performs calculations on the data
-- Formats the results into a PDF
-- Sends the PDF via email
-
-Identify which SOLID principle this violates and explain why. Propose a redesign.
-
----
-
-**32.** Look at the following code:
+The following code reads the radius of a circle from the user. Following defensive programming practice, write the assert statement (using the `cassert` header) that ensures the radius is non-negative.
 
 ```cpp
-for (int i = 0; i < n; i++) {
-    x = y + z;
-    result[i] = x * x + i;
-}
-```
+#include <iostream>
+using namespace std;
+#include <cassert>
+int main() {
+    int radius = ReadRadius();
 
-Identify the code tuning optimization that should be applied here. Rewrite the optimized version and explain why it's faster.
+    // Checking if the user has entered a non-negative value for radius?
+    ___________________________________
 
----
-
-**33.** Explain the difference between `assert()` (dynamic assertion) and `static_assert()` in C++. For each, give one example of when you would use it.
-
----
-
-**34.** A student writes the following Google Test:
-
-```cpp
-TEST(MathTest, TestAdd) {
-    add(2, 3);
-}
-```
-
-The test passes with 100% code coverage of the `add()` function. Explain why this test is bad despite achieving full coverage.
-
----
-
-**35.** Explain what a "barricade" is in defensive programming. Draw or describe the flow of data from an external source to the core system, and explain what kind of checking happens at each stage.
-
----
-
-**36.** A developer needs to add a new payment method (Apple Pay) to an e-commerce system. The current code looks like:
-
-```cpp
-double processPayment(string type, double amount) {
-    if (type == "credit") { /* credit card logic */ }
-    else if (type == "paypal") { /* paypal logic */ }
-    // Must add Apple Pay here by editing this function
-}
-```
-
-Which SOLID principle is being violated? Rewrite the code (or describe the redesign) so that adding Apple Pay doesn't require modifying existing code.
-
----
-
-**37.** Explain the connection between iterators and the Interface Segregation Principle. Why do C++ iterators come in different categories (input, forward, bidirectional, random access) instead of one universal iterator with all capabilities?
-
----
-
-**38.** True or False: Emergent design means "no design." Explain your answer and describe how the 4 Rules of Simple Design prevent design from deteriorating.
-
----
----
-
-# ANSWER KEY
-
----
-
-## PART A: MULTIPLE CHOICE
-
-| Q | Answer | Explanation |
-|---|--------|-------------|
-| 1 | **C** | SRP = single responsibility = one reason to change |
-| 2 | **B** | OCP = open for extension, closed for modification. Adding a new shape should NOT require editing existing code |
-| 3 | **C** | LSP = subclass must be substitutable for parent without breaking behavior. Square breaks Rectangle's contract |
-| 4 | **D** | ISP = don't force clients to depend on methods they don't use. Dog shouldn't need fly() |
-| 5 | **D** | DIP = depend on abstractions, not concretions. OrderService should depend on a Database interface, not MySQL directly |
-| 6 | **C** | Protected = accessible to subclasses but not outside the class hierarchy |
-| 7 | **B** | Pure virtual (`= 0`) makes the class abstract — it can't be instantiated and subclasses MUST implement the function |
-| 8 | **C** | Duck typing = if it has the right methods, Python treats it as the right type regardless of inheritance |
-| 9 | **B** | Tests first, then refactor duplication, then make it expressive, then minimize |
-| 10 | **C** | Template Method = abstract class defines skeleton, subclasses fill in specific steps |
-| 11 | **C** | Emergent design specifically avoids too much upfront planning — that's its whole point |
-| 12 | **B** | Span = lines between consecutive references to the same variable |
-| 13 | **B** | Shorter live time = smaller window where a variable can be incorrectly modified |
-| 14 | **C** | C++ convention: constants, typedefs, macros in ALL_CAPS |
-| 15 | **B** | static_assert is checked at compile time — fails compilation if false |
-| 16 | **B** | Barricade = validation boundary between untrusted external data and clean internal system |
-| 17 | **C** | Safety-critical systems should shut down rather than operate with invalid data |
-| 18 | **B** | Offensive programming = make bugs as visible as possible during development |
-| 19 | **C** | Loop-invariant code motion = move constant computations outside the loop |
-| 20 | **C** | Loop interchange = swap inner/outer loops for better cache locality (row-major access) |
-| 21 | **B** | Strength reduction = replace expensive ops (multiply) with cheaper ones (add) |
-| 22 | **B** | Always measure/profile before optimizing. Don't guess where bottlenecks are |
-| 23 | **B** | EXPECT = non-fatal (continues), ASSERT = fatal (stops test immediately) |
-| 24 | **B** | Coverage = execution breadth, NOT correctness. Tests can execute code without validating it |
-| 25 | **B** | `on:` specifies the trigger event for the workflow |
-| 26 | **B** | `end()` returns an iterator PAST the last element (one beyond), not TO the last element |
-| 27 | **D** | Random access iterators support `+`, `-`, `[]` — jumping to any position |
-| 28 | **C** | The lecture's core message: humility, discipline, curiosity > raw intelligence |
-| 29 | **B** | Crunch = extended overwork periods, common in game dev, leads to burnout |
-| 30 | **B** | ASSERT stops the test if it fails — essential when continuing would crash (null dereference) |
-
----
-
-## PART B: FREE RESPONSE
-
----
-
-**31.** This violates **SRP (Single Responsibility Principle)**. `ReportManager` has FOUR reasons to change: database schema changes, calculation logic changes, PDF format changes, email service changes. Changing any one of these could break the others.
-
-**Redesign:**
-```
-class DataFetcher     — responsible for getting data from the database
-class DataCalculator  — responsible for performing calculations
-class PDFFormatter    — responsible for formatting results into a PDF
-class EmailSender     — responsible for sending emails
-```
-Each class has one job and one reason to change. `ReportManager` can orchestrate them, but the logic is separated.
-
----
-
-**32.** This needs **loop-invariant code motion**. The expression `x = y + z` and `x * x` don't change across iterations — they're computed n times for no reason.
-
-**Optimized:**
-```cpp
-x = y + z;
-int t = x * x;
-for (int i = 0; i < n; i++) {
-    result[i] = t + i;
-}
-```
-
-This is faster because `y + z` and `x * x` are now computed ONCE instead of n times. The loop body only does one addition per iteration instead of two additions and a multiplication.
-
----
-
-**33.**
-- **`assert()` (dynamic)** is checked at **runtime**. If the condition is false, the program aborts with an error message. Use it for conditions that should never happen during execution, like a pointer being null after allocation: `assert(ptr != nullptr);`
-
-- **`static_assert()` (static)** is checked at **compile time**. If the condition is false, compilation fails. Use it for platform/type assumptions that must be true for the code to work correctly: `static_assert(sizeof(int) == 4, "int must be 4 bytes");`
-
-The key difference: static_assert catches problems before the program even runs. assert catches problems during execution. static_assert cannot check runtime values (like user input); assert cannot check compile-time properties (like type sizes).
-
----
-
-**34.** The test has NO assertions. It calls `add(2, 3)` but never checks if the result is correct. The function executes (100% coverage), but the test would pass even if `add(2, 3)` returned 999 or threw an exception.
-
-This demonstrates why **coverage ≠ quality**. Coverage measures execution breadth (did the code run?), not correctness (did it produce the right output?). A proper test would be:
-
-```cpp
-TEST(MathTest, TestAdd) {
-    EXPECT_EQ(add(2, 3), 5);
+    cout << "Radius is valid" << endl;
+    double area = 3.14159 * radius * radius;
+    cout << "Area: " << area << endl;
+    return 0;
 }
 ```
 
 ---
 
-**35.** A barricade is a validation layer at the boundary between untrusted external data and the clean core system.
+**Q3. (2 pts) Read the YAML file. Choose ALL true statements.**
 
-**Data flow:**
-```
-External source (user input, API, file, internet)
-        │
-        ▼
-   [BARRICADE]
-   - Validate all inputs (type, range, format)
-   - Sanitize data (strip dangerous characters)
-   - Reject/handle invalid data with error handling
-        │
-        ▼
-   Clean, validated data
-        │
-        ▼
-   [CORE SYSTEM]
-   - Assumes data is clean
-   - Uses assertions (not error handling) for impossible states
-   - Focuses on business logic, not validation
+```yaml
+name: build-and-test
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile
+        run: g++ -o app main.cpp
+      - name: Run tests
+        run: ./run_tests
 ```
 
-Inside the barricade: use **error handling** (bad data is expected).
-Inside the core: use **assertions** (bad data should be impossible — if it appears, something is seriously wrong).
+- [ ] A) This workflow is triggered on pull requests to the main branch
+- [ ] B) This workflow is triggered on push events to the develop branch
+- [ ] C) The workflow's name is build-and-test
+- [ ] D) This workflow builds and runs all unit tests whenever a change is pushed to any branch
+- [ ] E) The workflow is triggered on push events to the main branch
+- [ ] F) The job's name is testing
 
 ---
 
-**36.** This violates **OCP (Open/Closed Principle)**. Adding Apple Pay requires modifying the `processPayment` function, which risks breaking the existing credit card and PayPal logic.
+**Q4. (2 pts) Compute average span.**
 
-**Redesign using polymorphism:**
+In the following code snippet, what is the average span of variable `total`?
+
+```
+total = 0;
+count = 5;
+x = 10;
+total = total + x;
+y = 20;
+total = total + y;
+```
+
+A) 0
+B) 1
+C) 2
+D) 3
+
+---
+
+**Q5. (1 pt) Iterator question.**
+
+After executing the following C++ code, what is pointed to by `ptr`?
+
 ```cpp
-class PaymentProcessor {
+vector<int> v = {15, 25, 35, 45, 55};
+vector<int>::iterator ptr = v.end();
+```
+
+A) Element 55
+B) Element 45
+C) Element 15
+D) None of the above
+
+---
+
+**Q6. (3 pts) Match the problem with the concept that describes the most likely solution.**
+
+| Problem | | Concept |
+|---|---|---|
+| Your app loads slowly on mobile. Users complain about wait times. You want to find what's causing the delay and reduce it. | ___ | A) Code coverage |
+| You merged a teammate's code and now several features are broken. You want to make sure every part of the codebase is being tested. | ___ | B) Refactoring |
+| Your codebase has grown messy — duplicate functions, unclear names, deeply nested logic. It works but is hard to maintain. | ___ | C) Code tuning |
+| A client reports that the checkout page crashes when entering a coupon code with special characters. | ___ | D) Code fix |
+
+---
+
+**Q7. (1 pt) True or False.**
+
+"In Emergent Design, minimizing the number of classes always has a higher priority over applying the single responsibility principle."
+
+A) True
+B) False
+
+---
+
+**Q8. (3 pts) Match each term with the BEST definition.**
+
+| Term | | Definition |
+|---|---|---|
+| Abstraction | ___ | A) Restricting access to components within an object; in C++ achieved by making attributes and methods private or protected |
+| Encapsulation | ___ | B) A class that cannot be instantiated but can be inherited from |
+| Abstract class | ___ | C) Having classes and therefore objects get members from other classes in a hierarchical manner |
+| Interface | ___ | D) Hiding complexity of an object, making public only the behavior that is relevant for the system or user |
+| Inheritance | ___ | E) A behavior contract that allows for an understanding of what an object can do |
+| Subclass | ___ | F) A class that inherits from a superclass |
+
+---
+
+**Q9. (2 pts) Select ALL that are rules of Simple Design (Emergent Design).**
+
+- [ ] A) Minimizes the number of classes and methods
+- [ ] B) It is secure and error resistant
+- [ ] C) There is no code duplication
+- [ ] D) Running all tests
+- [ ] E) The code expresses the intent of the programmer
+- [ ] F) Makes sure everything is well documented
+- [ ] G) Benefits the company
+
+---
+
+**Q10. (3 pts) Order the code tuning procedure steps.**
+
+Put the following steps in the correct order to follow once poor performance is observed:
+
+___ Save a working version of the code so you can get back to the "last known good state," then measure the system to find bottlenecks.
+
+___ Determine the reason behind the weak performance. If code tuning is not appropriate, go back to development.
+
+___ Tune the bottleneck identified.
+
+___ Measure the improvement from the code tuning strategy you applied.
+
+___ If no improvement occurs, revert code to the last known good state.
+
+Repeat starting from top.
+
+---
+
+**Q11. (2 pts) Error message question. Choose ALL that apply.**
+
+Which of the following is an appropriate error message to be displayed for a user who is trying to submit a form online but has entered an invalid email address? (Choose all that apply):
+
+- [ ] A) Error 0x7FF2: Regex validation failed for field "EMAIL" in table "USERS". Abort.
+- [ ] B) Please enter a valid email address (e.g., name@example.com). Check for typos and try again.
+- [ ] C) Something is wrong with your data and you should fix it. We are not responsible for your mistakes.
+- [ ] D) Email validation error: string "user@" does not match pattern `^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$`. Expected format: RFC 5322 compliant address.
+- [ ] E) This message is a test, replace with real message later
+
+---
+
+**Q12. (1 pt) Which of the following is NOT true of Interfaces?**
+
+A) They insulate clients of a class from changes to the implementation of a class.
+B) They abstract away details of how the class works, making the class easier to understand and use.
+C) They should not be changed unless absolutely necessary.
+D) They consist of the public and protected (but not private) data and functions of a class.
+
+---
+
+**Q13. (1 pt) Iterator question.**
+
+After executing the following C++ code, what is the element pointed to by `ptr`?
+
+```cpp
+vector<int> v = {50, 60, 70, 80, 90};
+vector<int>::iterator ptr = v.begin();
+next(ptr, 3);
+```
+
+A) 80
+B) 90
+C) 50
+D) 70
+
+---
+
+**Q14. (2 pts) ISP fix.**
+
+The following code violates the Interface Segregation Principle (ISP). Which code change fixes it?
+
+```cpp
+class MediaDevice {
 public:
-    virtual double process(double amount) = 0;
+    virtual void playAudio(string file) = 0;
+    virtual void playVideo(string file) = 0;
+    virtual void recordAudio(string file) = 0;
 };
 
-class CreditCardProcessor : public PaymentProcessor {
-    double process(double amount) override { /* credit card logic */ }
-};
-
-class PayPalProcessor : public PaymentProcessor {
-    double process(double amount) override { /* paypal logic */ }
-};
-
-class ApplePayProcessor : public PaymentProcessor {
-    double process(double amount) override { /* apple pay logic */ }
+class MusicPlayer : public MediaDevice {
+public:
+    void playAudio(string file) { cout << file << endl; }
+    void playVideo(string file) {
+        throw runtime_error("Music players can't play video!");
+    }
+    void recordAudio(string file) {
+        throw runtime_error("This player can't record!");
+    }
 };
 ```
 
-Now adding Apple Pay = adding a new class. The existing `CreditCardProcessor` and `PayPalProcessor` are never touched. The calling code uses `PaymentProcessor*` and doesn't care which implementation it gets.
+A) Add the virtual keyword to playVideo and recordAudio inside MusicPlayer
+B) Move playVideo and recordAudio outside the MediaDevice class and into separate abstract classes, and let devices inherit only from the interfaces they actually support
+C) Provide a default implementation for all functions inside the MediaDevice class
+D) None of the above
 
 ---
 
-**37.** The Iterator categories follow ISP because each category only provides the operations that make sense for that type of collection:
+**Q15. (1 pt) True or False.**
 
-- A `forward_list` can only go forward, so its iterator only supports `++` (forward iterator)
-- A `list` can go both directions, so its iterator supports `++` and `--` (bidirectional)
-- A `vector` has contiguous memory, so its iterator supports `+n`, `-n`, `[]` (random access)
+"The best time to start code tuning is during the development or testing phases of your software."
 
-If there was ONE universal iterator with all capabilities, a forward_list would be forced to implement `it - 5` or `it[3]` even though those operations don't make sense for a singly-linked list. They'd either throw errors or give wrong results — violating both ISP (forced to depend on unused methods) and LSP (substituting a forward iterator where random access is expected would break).
-
-By segregating into categories, algorithms can specify exactly what they need. `std::sort` requires random access iterators. `std::find` only needs input iterators. Each algorithm depends on the minimal interface it actually uses.
+A) True
+B) False
 
 ---
 
-**38.** FALSE. Emergent design does NOT mean "no design." It means design evolves iteratively through feedback and refactoring, rather than being fully planned upfront.
+**Q16. (3 pts) Select ALL that represent good practices in variable naming and declaration.**
 
-The 4 Rules of Simple Design prevent deterioration:
+- [ ] A) Use names that are descriptive and self-explainable
+- [ ] B) Always leave a class constructor and destructor empty; every class member should be initialized and destroyed within member functions
+- [ ] C) Have a list of reusable variables that can be easily remembered (like temp, counter, res)
+- [ ] D) Keep all your code in a single file for easy access
+- [ ] E) Try to keep spans short to reduce the window of vulnerability
+- [ ] F) Declare and instantiate a variable close to where it's going to be used
 
-1. **Run all tests** — ensures the system works after every change. You can't accidentally break things if tests catch regressions
-2. **No duplication** — forces you to refactor and consolidate shared logic, keeping the codebase clean
-3. **Expressive** — requires clear naming and small functions, so the design remains understandable as it grows
-4. **Minimal classes and methods** — prevents over-engineering and unnecessary complexity
+---
 
-Together, these rules create a feedback loop: write tests → refactor to remove duplication → make it readable → keep it small. The design "emerges" from consistently applying these rules, not from having no design at all.
+**Q17. (1 pt) Which of the following activities is usually NOT intended to improve your software runtime performance?**
+
+A) Turning on compiler optimizations
+B) Buying new hardware
+C) Eliminating code smells
+D) Choosing a better data structure or algorithm to solve the problem
+E) All the above
+
+---
+
+---
+
+# ANSWER KEY — VARIATION A
+
+---
+
+**Q1.**
+- Single Responsibility → **C**
+- Open/Closed → **A**
+- Liskov Substitution → **E**
+- Interface Segregation → **B**
+- Dependency Inversion → **D**
+
+---
+
+**Q2.**
+```cpp
+assert(radius >= 0);
+```
+
+---
+
+**Q3.** A, B, C, E, F are all true.
+- A) ✅ Triggered on PR to main
+- B) ✅ Triggered on push to develop
+- C) ✅ Name is build-and-test
+- D) ❌ Only pushes to main and develop, not ANY branch
+- E) ✅ Triggered on push to main
+- F) ✅ Job name is testing
+
+---
+
+**Q4.** **C) 2**
+
+```
+Line 1: total = 0;          ← first reference
+Line 2: count = 5;          (1 line gap)
+Line 3: x = 10;             (2 lines gap)
+Line 4: total = total + x;  ← second reference, span = 2
+Line 5: y = 20;             (1 line gap)
+Line 6: total = total + y;  ← third reference, span = 1
+```
+Average span = (2 + 1) / 2 = **1.5** → but since the gaps between references to `total` are lines 1→4 (span=2) and 4→6 (span=1), average = (2+1)/2 = 1.5. Depending on how your professor counts, the answer is either 1 or 2. On the real exam the answer was **1** for a similar question — span counts the number of intervening variable references/statements between consecutive uses, not lines.
+
+Let's recount using the real exam's method:
+```
+total = 0;        ← ref 1
+count = 5;        ← 1 other variable reference
+x = 10;           ← 2 other variable references
+total = total+x;  ← ref 2. Span = 2
+y = 20;           ← 1 other variable reference
+total = total+y;  ← ref 3. Span = 1
+```
+Average span = (2 + 1) / 2 = **1.5**. Closest answer: **C) 2** (if rounding up) or could be 1. Check your professor's counting method from the real exam.
+
+---
+
+**Q5.** **D) None of the above.** `end()` returns an iterator past the last element — it does NOT point to any element in the vector. Dereferencing it is undefined behavior.
+
+---
+
+**Q6.**
+- Slow app / reduce delay → **C) Code tuning**
+- Features broken / make sure everything is tested → **A) Code coverage**
+- Messy code / hard to maintain → **B) Refactoring**
+- Checkout crash with special characters → **D) Code fix**
+
+---
+
+**Q7.** **B) False.** Rule 4 (minimal classes/methods) is the LOWEST priority of the 4 rules. SRP (single responsibility) is fundamental — you should never violate it just to reduce the number of classes.
+
+---
+
+**Q8.**
+- Abstraction → **D**
+- Encapsulation → **A**
+- Abstract class → **B**
+- Interface → **E**
+- Inheritance → **C**
+- Subclass → **F**
+
+---
+
+**Q9.** **A, C, D, E** are correct.
+- A) ✅ Minimizes classes and methods (Rule 4)
+- B) ❌ Not one of the 4 rules
+- C) ✅ No code duplication (Rule 2)
+- D) ✅ Running all tests (Rule 1)
+- E) ✅ Expresses intent of programmer (Rule 3)
+- F) ❌ Not one of the 4 rules
+- G) ❌ Not one of the 4 rules
+
+---
+
+**Q10.** Correct order:
+1. Save a working version, then measure to find bottlenecks
+2. Determine the reason behind weak performance
+3. Tune the bottleneck identified
+4. Measure the improvement
+5. If no improvement, revert to last known good state
+
+Repeat.
+
+---
+
+**Q11.** **B** only.
+- A) ❌ Exposes internal error codes and table names — security risk, not user-friendly
+- B) ✅ Friendly, specific, tells user what to do
+- C) ❌ Blames the user, unprofessional
+- D) ❌ Exposes regex pattern and technical details
+- E) ❌ Placeholder, not a real message
+
+---
+
+**Q12.** **D.** Interfaces consist of the **public** methods only — not protected. Protected members are part of the implementation, not the interface. The interface is what external code can see and use.
+
+---
+
+**Q13.** **C) 50.** `next(ptr, 3)` returns a new iterator 3 positions forward, but it does NOT modify `ptr`. `ptr` still points to `v.begin()`, which is element 50. (This is the same trick from the real exam — `next()` doesn't change the original iterator.)
+
+---
+
+**Q14.** **B.** Move playVideo and recordAudio into separate abstract classes. MusicPlayer should only inherit from the audio interface. This follows ISP — classes should only depend on methods they actually use.
+
+---
+
+**Q15.** **B) False.** Code tuning should happen AFTER performance is measured and a bottleneck is identified. Tuning during development is premature optimization.
+
+---
+
+**Q16.** **A, E, F.**
+- A) ✅ Descriptive, self-explainable names
+- B) ❌ Constructor should initialize members, destructor should free memory
+- C) ❌ Reusable names like "temp" and "res" are anti-patterns — use intention-revealing names
+- D) ❌ Code should be modular, not crammed in one file
+- E) ✅ Short spans reduce window of vulnerability
+- F) ✅ Declare close to use = good practice
+
+---
+
+**Q17.** **C) Eliminating code smells.** Code smells are about code quality/maintainability, not runtime performance. Compiler optimizations, better hardware, and better algorithms all directly improve performance.
+
+---
+---
+
+# PRACTICE EXAM — VARIATION B
+
+**Different questions, same format as the real exam.**
+
+---
+
+**Q1. (3 pts) Match each OOP concept with the BEST description.**
+
+| Concept | | Description |
+|---|---|---|
+| Encapsulation | ___ | A) A class that cannot be instantiated directly and must be inherited |
+| Polymorphism | ___ | B) Bundling data with methods and restricting direct access via private/protected |
+| Abstract class | ___ | C) Objects of different classes responding to the same method call in different ways |
+| Pure virtual function | ___ | D) A function declared with `= 0` that subclasses MUST implement |
+| Duck typing | ___ | E) If it has the right methods, treat it as the right type (Python) |
+
+---
+
+**Q2. (4 pts) Write the assert statements.**
+
+The following code reads two test scores and computes the average. Following defensive programming practice, write TWO assert statements ensuring both scores are between 0 and 100 (inclusive).
+
+```cpp
+#include <iostream>
+using namespace std;
+#include <cassert>
+int main() {
+    int score1 = ReadScore();
+    int score2 = ReadScore();
+
+    // Ensure both scores are valid (0-100)?
+    ___________________________________
+    ___________________________________
+
+    double avg = (score1 + score2) / 2.0;
+    cout << "Average: " << avg << endl;
+    return 0;
+}
+```
+
+---
+
+**Q3. (2 pts) Read the YAML file. Choose ALL true statements.**
+
+```yaml
+name: lint-check
+on:
+  pull_request:
+    branches: [ main, staging ]
+jobs:
+  lint:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run linter
+        run: cpplint --recursive src/
+```
+
+- [ ] A) This workflow runs on Ubuntu
+- [ ] B) This workflow is triggered on pull requests to staging
+- [ ] C) The workflow name is lint
+- [ ] D) The workflow name is lint-check
+- [ ] E) This workflow runs on push events to main
+- [ ] F) This workflow is triggered on pull requests to main
+
+---
+
+**Q4. (2 pts) Compute average span.**
+
+What is the average span of variable `sum`?
+
+```
+sum = 0;
+a = 5;
+b = 10;
+sum = sum + a;
+c = 15;
+sum = sum + c;
+```
+
+A) 0
+B) 1
+C) 1.5
+D) 2
+
+---
+
+**Q5. (1 pt) Iterator question.**
+
+After executing the following C++ code, what value does `*it` give?
+
+```cpp
+vector<int> v = {100, 200, 300, 400, 500};
+vector<int>::iterator it = v.begin();
+advance(it, 4);
+```
+
+A) 400
+B) 500
+C) 100
+D) Undefined behavior
+
+---
+
+**Q6. (2 pts) ISP fix.**
+
+```cpp
+class Vehicle {
+public:
+    virtual void drive() = 0;
+    virtual void fly() = 0;
+    virtual void sail() = 0;
+};
+
+class Car : public Vehicle {
+public:
+    void drive() override { cout << "driving"; }
+    void fly() override { throw runtime_error("Cars can't fly!"); }
+    void sail() override { throw runtime_error("Cars can't sail!"); }
+};
+```
+
+Which SOLID principle is violated and how would you fix it?
+
+A) OCP — make Vehicle non-abstract
+B) ISP — split Vehicle into Drivable, Flyable, Sailable interfaces; Car only inherits Drivable
+C) SRP — Car has too many methods
+D) DIP — Car should depend on abstractions
+
+---
+
+**Q7. (1 pt) True or False.**
+
+"High code coverage guarantees that the software is free of bugs."
+
+A) True
+B) False
+
+---
+
+**Q8. (3 pts) Select ALL good practices from the list.**
+
+- [ ] A) Initialize class member data in the constructor
+- [ ] B) Ignore compiler warning messages if the program runs
+- [ ] C) Use `const` when a variable shouldn't change
+- [ ] D) Always validate input before assigning to local variables
+- [ ] E) Use the destructor to free memory allocated in the constructor
+- [ ] F) Reuse the same variable for different purposes to save memory
+
+---
+
+**Q9. (2 pts) Match each scenario to the SOLID principle it violates.**
+
+| Scenario | | Principle |
+|---|---|---|
+| A `Logger` class handles file logging, database logging, and email notifications | ___ | A) OCP |
+| Adding a new report type requires editing a giant switch statement | ___ | B) SRP |
+| A `Penguin` class inherits `Bird` and throws an error when `fly()` is called | ___ | C) LSP |
+| A `NotificationService` directly instantiates `GmailSender` instead of using an email interface | ___ | D) DIP |
+
+---
+
+**Q10. (1 pt) Which describes offensive programming?**
+
+A) Writing code that gracefully handles all user errors in production
+B) Making errors crash as loudly as possible during development to catch bugs early
+C) Removing all error handling to make code faster
+D) Using encryption to protect against attacks
+
+---
+
+**Q11. (2 pts) Error message question.**
+
+A user tries to upload a file but exceeds the 10MB size limit. Which is the best error message?
+
+A) Error: IOException at line 247 in FileUploadHandler.java — maxFileSize exceeded
+B) Something went wrong. Try again later.
+C) The file you selected is too large. Please choose a file under 10MB.
+D) UPLOAD_FAILED: fileSize=15728640 > maxAllowed=10485760. Buffer overflow prevented.
+
+---
+
+**Q12. (2 pts) Loop optimization.**
+
+Identify the optimization and rewrite:
+
+```cpp
+for (int i = 0; i < 1000; i++) {
+    arr[i] = arr[i] + base_value;
+    if (debug_mode)
+        log(arr[i]);
+}
+```
+
+---
+
+**Q13. (1 pt) What is the difference between `EXPECT_EQ` and `ASSERT_EQ` in Google Test?**
+
+A) `EXPECT_EQ` checks equality at compile time; `ASSERT_EQ` checks at runtime
+B) `EXPECT_EQ` continues the test on failure; `ASSERT_EQ` stops the test on failure
+C) They are identical
+D) `ASSERT_EQ` is deprecated
+
+---
+
+---
+
+# ANSWER KEY — VARIATION B
+
+---
+
+**Q1.**
+- Encapsulation → **B**
+- Polymorphism → **C**
+- Abstract class → **A**
+- Pure virtual function → **D**
+- Duck typing → **E**
+
+---
+
+**Q2.**
+```cpp
+assert(score1 >= 0 && score1 <= 100);
+assert(score2 >= 0 && score2 <= 100);
+```
+
+---
+
+**Q3.** **B, D, F.**
+- A) ❌ Runs on macos-latest, not Ubuntu
+- B) ✅ PR to staging triggers it
+- C) ❌ "lint" is the job name, not the workflow name
+- D) ✅ Workflow name is lint-check
+- E) ❌ Not triggered on push — only on pull_request
+- F) ✅ PR to main triggers it
+
+---
+
+**Q4.** **C) 1.5**
+```
+sum = 0;          ← ref 1
+a = 5;            (1 intervening)
+b = 10;           (2 intervening)
+sum = sum + a;    ← ref 2. Span = 2
+c = 15;           (1 intervening)
+sum = sum + c;    ← ref 3. Span = 1
+```
+Average span = (2 + 1) / 2 = **1.5**
+
+---
+
+**Q5.** **B) 500.** `advance(it, 4)` DOES modify `it` (unlike `next()` which returns a new iterator). It moves 4 positions from begin → index 4 → element 500.
+
+---
+
+**Q6.** **B) ISP.** Car is forced to implement fly() and sail() even though it can't do either. Fix: split into `Drivable`, `Flyable`, `Sailable` interfaces. Car only inherits from `Drivable`.
+
+---
+
+**Q7.** **B) False.** Coverage measures how much code was executed, not whether the output was validated. Tests can run code without meaningful assertions.
+
+---
+
+**Q8.** **A, C, D, E.**
+- A) ✅ Initialize in constructor
+- B) ❌ Never ignore warnings
+- C) ✅ Use const
+- D) ✅ Validate input
+- E) ✅ Free memory in destructor
+- F) ❌ Use one variable per purpose
+
+---
+
+**Q9.**
+- Logger does too many things → **B) SRP**
+- Giant switch needs editing for new types → **A) OCP**
+- Penguin can't fly but inherits fly() → **C) LSP**
+- Direct instantiation of GmailSender → **D) DIP**
+
+---
+
+**Q10.** **B.** Offensive programming = fail hard in development so bugs are caught immediately.
+
+---
+
+**Q11.** **C.** Friendly, specific, tells the user exactly what's wrong and what to do.
+
+---
+
+**Q12.** This needs **loop unswitching**. The `if (debug_mode)` condition doesn't change per iteration — move it outside:
+
+```cpp
+if (debug_mode) {
+    for (int i = 0; i < 1000; i++) {
+        arr[i] = arr[i] + base_value;
+        log(arr[i]);
+    }
+} else {
+    for (int i = 0; i < 1000; i++) {
+        arr[i] = arr[i] + base_value;
+    }
+}
+```
+
+---
+
+**Q13.** **B.** `EXPECT_EQ` is non-fatal (test continues on failure to show all failures). `ASSERT_EQ` is fatal (test stops immediately — use when continuing would be meaningless).
